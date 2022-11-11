@@ -1,0 +1,7 @@
+<div style="margin:20px">
+<h2>Previous Events:</h2>
+<%= render @previous_events %>
+<h2>Upcoming Events:</h2>
+<%= render @upcoming_events %>
+</div>
+<%= link_to "Create Event" ,  new_event_path,class:"btn btn-primary" %>

@@ -1,0 +1,26 @@
+<h2><%= @event.name %></h2>
+<h4>Description:</h4>
+<p><%= @event.description %></p>
+<p><strong>Date :</strong> <%= @event.e_date %></p>
+<p>Created by: <%= @event.creator.firstname %> <%= @event.creator.lastname %></p>
+<%= link_to "Edit", edit_event_path(@event) if current_user == @event.creator %> |
+<%= link_to "Delete", event_path(@event),method: :delete if current_user == @event.creator %>
+<h4>Attendees:</h4>
+<% if @event.attendees.any? %>
+<ul>
+
+<% @event.attendees.each do |attendee| %>
+    <li><%= link_to "#{attendee.firstname} #{ attendee.lastname}", attendee %></li>
+    <%end%>
+</ul>
+<%else%>
+<p>No attendees yet</p>
+<%end%>
+<% unless current_user == @event.creator %>
+<% unless  current_user.attended?(@event) %>
+<%= button_to "Attend" , event_event_attendees_path(@event) ,class:"btn btn-primary",method: :post, disabled:  current_user.attended?(@event)%>
+<%else%>
+<%= button_to "Leave" , event_event_attendee_path(@event) ,class:"btn btn-primary",method: :delete, disabled:  !current_user.attended?(@event) %>
+<%end%>
+<% end %>
+<%= link_to "Back", root_path %>

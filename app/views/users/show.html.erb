@@ -1,0 +1,20 @@
+<h4><%= @user.firstname %> <%= @user.lastname%></h4>
+
+<br/>
+
+<h4><%= @user == current_user ? "My Events" : "#{@user.firstname}'s Events" %> : </h4>
+
+<%= render @events %>
+
+<h4>Previous Events:</h4>
+<ul>
+<% @attended_events.where("e_date < ?",Time.now).each do |event| %>
+    <li><%= link_to event.name , event %> </li>
+    <%end%>
+</ul>
+<h4>Upcoming Events:</h4>
+<ul>
+<% @attended_events.where("e_date > ?",Time.now).each do |event| %>
+    <li><%= link_to event.name , event %> </li>
+    <%end%>
+</ul>
