@@ -9,8 +9,13 @@ class EventsController < ApplicationController
     @event= current_user.events.build(event_params)
 
      if @event.save 
+        if params[:event][:attendee_ids].present?
+          params[:event][:attendee_ids].each do |attendee|
+            EventAttendee.new(attendee_id:attendee,event_id:@event.id).save
+          end
+        end 
+       redirect_to @event
       
-     redirect_to @event
      else 
       render 'new'
      end
@@ -32,6 +37,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+
   end
   def show 
     @event= Event.find(params[:id])
@@ -44,6 +50,7 @@ class EventsController < ApplicationController
  private 
  
   def event_params
-    params.require(:event).permit(:name,:description,:e_date)
+    params.require(:event).permit(:name,:description,:e_date,:attendee_ids)
   end
+   
 end
