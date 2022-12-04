@@ -13,8 +13,18 @@
     <li><%= link_to "#{attendee.firstname} #{ attendee.lastname}", attendee %></li>
     <%end%>
 </ul>
+
 <%else%>
 <p>No attendees yet</p>
+<%end%>
+<% if @event.categories.any? %>
+<h4>Categories:</h4>
+<ul>
+
+<% @event.categories.each do |category| %>
+    <li><%= link_to category.name, category %></li>
+    <%end%>
+</ul>
 <%end%>
 <% unless current_user == @event.creator %>
 <% unless  current_user.attended?(@event) %>

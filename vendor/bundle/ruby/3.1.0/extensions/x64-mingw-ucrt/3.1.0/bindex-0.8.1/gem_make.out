@@ -1,0 +1,16 @@
+current directory: C:/Users/user/Roni/the-odin-project/private-events/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+C:/Ruby31-x64/bin/ruby.exe -I C:/Ruby31-x64/lib/ruby/3.1.0 -r ./siteconf20221203-21176-ay7z3z.rb extconf.rb
+creating Makefile
+
+current directory: C:/Users/user/Roni/the-odin-project/private-events/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= clean
+
+current directory: C:/Users/user/Roni/the-odin-project/private-events/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\=
+generating cruby-x64-mingw-ucrt.def
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: C:/Users/user/Roni/the-odin-project/private-events/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20221203-21176-zlwbi7/skiptrace/internal

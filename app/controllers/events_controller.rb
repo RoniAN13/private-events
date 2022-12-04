@@ -7,11 +7,16 @@ class EventsController < ApplicationController
   end
   def create
     @event= current_user.events.build(event_params)
-
+    @fullname = "#{current_user.firstname} #{current_user.lastname}"
      if @event.save 
         if params[:event][:attendee_ids].present?
           params[:event][:attendee_ids].each do |attendee|
             EventAttendee.new(attendee_id:attendee,event_id:@event.id).save
+          end
+        end 
+        if params[:event][:category_ids].present?
+          params[:event][:category_ids].each do |category|
+            EventCategory.new(category_id:category,event_id:@event.id).save
           end
         end 
        redirect_to @event
@@ -45,12 +50,13 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
+    flash[:alert]= "Event Deleted"
     redirect_to root_path
   end
  private 
  
   def event_params
-    params.require(:event).permit(:name,:description,:e_date,:attendee_ids)
+    params.require(:event).permit(:name,:description,:e_date,:attendee_ids,:category_ids)
   end
    
 end

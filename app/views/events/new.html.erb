@@ -13,7 +13,21 @@
 <%= f.label :date %>
 <%= f.date_field :e_date, autofocus: true, autocomplete: 'e_date', class: 'form-control' %>
 </div>
-<%= f.select :attendee_ids, options_from_collection_for_select(User.where.not(id: current_user.id), :id, :firstname, {:selected => @event.attendee_ids.split(';')}), {}, {:multiple => true, :size => 4, :name => 'event[attendee_ids][]'} %>
+
+<div class="form-group">
+<label for="event_Attendees">Attendees</label>
+<input name="event[attendee_ids][]" type="hidden" value="" autocomplete="off">
+<select multiple="multiple" size="4" name="event[attendee_ids][]" id="event_attendee_ids">
+<% User.where.not(id: current_user.id).each do |user| %>
+<option value=<%= user.id %>><%= user.firstname %> <%= user.lastname %></option>
+<%end %>
+</select>
+
+</div>
+<div class="form-group">
+<%= f.label :Categories %>
+<%= f.select :category_ids, options_from_collection_for_select(Category.all, :id, :name , {:selected => @event.category_ids.split(';')}), {}, {:multiple => true, :size => 4, :name => 'event[category_ids][]'} %>
+</div>
 <div class="form-group">
 <%= f.submit "Add Event" , class:"btn btn-primary"%>
 </div>

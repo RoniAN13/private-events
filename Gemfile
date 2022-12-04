@@ -69,10 +69,17 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  
 end
 gem "bootstrap-sass"
 gem 'devise'
 gem 'devise-i18n'
-gem 'devise-bootstrap-views'
+
 gem 'jquery-rails'
+gem 'devise-bootstrap-views'
 gem 'sassc-rails', '~> 2.1.0'
+gem "rspec-rails", group: [:development, :test]
+group :development, :test do
+  gem 'shoulda-matchers'
+end
+gem 'factory_bot_rails'
